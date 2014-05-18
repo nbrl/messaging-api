@@ -31,6 +31,7 @@ class MessagesController {
 
 	public function postAction($request) {
 		// If we are POST'd some data, save it to the DB. Return value is message ID
+		// ID must be decremented by one to correlate to the ID we use to retrieve.
 		$data['id'] = $request->db->newMessage($request->params['body']) - 1;
 		return $data;
 	}
