@@ -9,19 +9,12 @@ class Request {
 		$this->db = new Redis();
 		$this->verb = $_SERVER['REQUEST_METHOD'];
 
-		// We need to read different vars depending on the webserver
-		if (empty($_SERVER['REQUEST_URI'])) {
-			// Apache
-			$this->url_parts = explode('/', ltrim($_SERVER['ORIG_PATH_INFO'], '/'));
-		} else {
-			// PHP built-in
-			$this->url_parts = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'));
-		}			
-
-		/*echo "ORIG_PATH_INFO";
-		print_r($_SERVER('ORIG_PATH_INFO'));
-		echo "\nREQUEST_URI";
-		print_r($_SERVER('REQUEST_URI'));*/
+		// Depending on our configuration, we may need to trim "api" or another
+		// foldername from our url_parts
+		$this->url_parts = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'));
+		if ($this->url_parts[0] == "api") {
+			array_shift($this->url_parts);
+		}
 
 		$this->parseIncomingParams();
 
