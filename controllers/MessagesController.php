@@ -31,7 +31,7 @@ class MessagesController {
 
 	public function postAction($request) {
 		// If we are POST'd some data, save it to the DB. Return value is message ID
-		$data['id'] = $request->db->newMessage($request->params['body']);
+		$data['id'] = $request->db->newMessage($request->params['body']) - 1;
 		return $data;
 	}
 
