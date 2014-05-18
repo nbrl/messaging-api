@@ -28,7 +28,7 @@ class Request {
 
 	public function parseIncomingParams() {
 		$params = array();
-		
+
 		if (isset($_SERVER['QUERY_STRING'])) {
 			parse_str($_SERVER['QUERY_STRING'], $params);
 		}
@@ -38,7 +38,10 @@ class Request {
 
 		$content_type = false;
 		if (isset($_SERVER['CONTENT_TYPE'])) {
+			// Apache
 			$content_type = $_SERVER['CONTENT_TYPE'];
+		} else if (isset($_SERVER['HTTP_CONTENT_TYPE'])) {
+			$content_type = $_SERVER['HTTP_CONTENT_TYPE'];
 		}
 
 		switch ($content_type) {
