@@ -13,6 +13,7 @@
 * Install and start redis-server
 * Clone this repo into your web document root
 * Run `composer install` or `php composer.phar install` to install the Predis dependency
+* Note: is a little picky with rewrite. Works on VPS, not on local installs. Advised use of PHP built-in.
 
 ## To use...
 (optional) To initially populate the redis store, run `populate.sh`
