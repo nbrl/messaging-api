@@ -1,4 +1,14 @@
 <?php
+/**
+ * Load any needed PHP files, gather query info and execute/display
+ *
+ * This file first generates a list of the files which must be included at run
+ * time and includes them. A new Request object is created which contains all
+ * of the details of the query sent (i.e. access URL, verb, args etc.). The
+ * controller is then chosen based on the URL (only ever messages) and the
+ * view chosen based on the request format (although only uses JSON).
+ * Incorrect API calls are handled by just giving a 404.
+ */
 
 // Gather list of all necessary classes
 $inc_list = array_merge(
