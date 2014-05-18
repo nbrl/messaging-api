@@ -8,7 +8,20 @@ class Request {
 	public function __construct() {
 		$this->db = new Redis();
 		$this->verb = $_SERVER['REQUEST_METHOD'];
-		$this->url_parts = explode('/', ltrim($_SERVER['ORIG_PATH_INFO'], '/'));
+
+		// We need to read different vars depending on the webserver
+		if (empty($_SERVER['REQUEST_URI'])) {
+			// Apache
+			$this->url_parts = explode('/', ltrim($_SERVER['ORIG_PATH_INFO'], '/'));
+		} else {
+			// PHP built-in
+			$this->url_parts = explode('/', ltrim($_SERVER['ORIG_PATH_INFO'], '/'));
+		}			
+
+		/*echo "ORIG_PATH_INFO";
+		print_r($_SERVER('ORIG_PATH_INFO'));
+		echo "\nREQUEST_URI";
+		print_r($_SERVER('REQUEST_URI'));*/
 
 		$this->parseIncomingParams();
 
