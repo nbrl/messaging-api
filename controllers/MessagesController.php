@@ -4,7 +4,7 @@ class MessagesController {
 
 	public function getAction($request) {
 		// Given http://host/one/two, url_parts[0] will be "one"
-		if (isset($request->url_parts[1]) ){ //&& !empty($request->url_parts[1])) { // &&... is a bit dirty
+		if (isset($request->url_parts[1]) && $request->url_parts[1] != "" ){
 			// Capture the ID for the desired message, if requested
 			$message_id = (int) $request->url_parts[1];
 
