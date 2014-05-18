@@ -18,8 +18,8 @@
 (optional) To initially populate the redis store, run `populate.sh`
 
 To put a message:
-```curl ${host};${port}/messages -X POST -H 'Content-Type: application/json' -d '{"body":"message"}'```
+    curl ${host};${port}/messages -X POST -H 'Content-Type: application/json' -d '{"body":"message"}'
 The return value will be the message ID that can be used for retrieving the message.
 
 To get a message by ID:
-```curl ${host}:${port}/messages/${msg_id}```
+    curl ${host}:${port}/messages/${msg_id}
