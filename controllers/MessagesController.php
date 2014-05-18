@@ -70,9 +70,7 @@ class MessagesController {
 	 * @param array  $args   Any arguments submitted with the method.
 	 */
 	public function __call($method, $args) {
-		//$data['body'] = "Method not defined.";
 		header("HTTP/1.0 404 Not Found");
-		//return $data;
 	}
 }
 
