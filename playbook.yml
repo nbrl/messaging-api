@@ -1,0 +1,38 @@
+---
+- hosts: all
+  sudo: true
+  user: vagrant
+  tasks:
+    - name: Install curl, php5-cli and redis
+      apt: pkg={{item}} install_recommends=no #update_cache=yes
+      with_items:
+#      - php5
+      - curl
+      - php5-cli
+      - redis-server
+    - name: Install composer to /usr/local/bin
+      shell: cd /usr/local/bin && (curl -sS https://getcomposer.org/installer | php) && mv /usr/local/bin/composer.phar /usr/local/bin/composer
+    - name: Install project dependencies with composer
+      #composer: command=install working_dir=/vagrant
+      sudo_user: vagrant
+      command: chdir=/vagrant composer install
+    - name: Run the built-in PHP webserver in /vagrant
+      sudo_user: vagrant
+      command: php -S 0.0.0.0:8080 -t /vagrant
+      async: 999999
+      poll: 0
+    - name: Ensure redis is running
+      service: name=redis-server state=running enabled=yes
+    - name: Prepopulate the redis data store
+      sudo_user: vagrant
+      command: /vagrant/populate.sh
+#      command: chdir=/vagrant php -S localhost:8080
+#      command: cd /vagrant; php -S localhost:8080
+#      async: 45
+#      poll: 0
+#      shell: php -S localhost:8080 -t /vagrant &
+#    - name: Install apache
+#      apt: pkg={{item}}
+#      with_items:
+#      - apache2
+#      - libapache2-mod-php5
