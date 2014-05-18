@@ -31,10 +31,10 @@ curl ${host}:${port}/messages/${msg_id}
 
 ### Example
 ```
-curl http://localhost:8080/messages -X POST -H 'Content-Type: application.json' -d '{"body":"this is my message"}'
-{"id":5} # (output)
+$ curl http://localhost:8080/messages -X POST -H 'Content-Type: application.json' -d '{"body":"this is my message"}'
+{"id":5}
 ```
 ```
-curl http://localhost:8080/messages/5
+$ curl http://localhost:8080/messages/5
 {"body":"this is my message"}
 ```
