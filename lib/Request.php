@@ -15,7 +15,7 @@ class Request {
 			$this->url_parts = explode('/', ltrim($_SERVER['ORIG_PATH_INFO'], '/'));
 		} else {
 			// PHP built-in
-			$this->url_parts = explode('/', ltrim($_SERVER['ORIG_PATH_INFO'], '/'));
+			$this->url_parts = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'));
 		}			
 
 		/*echo "ORIG_PATH_INFO";
